@@ -32,21 +32,21 @@ export default function Refresh() {
 }
 
 async function update(navigate, username, token) {
-    let applications = await APIService.getNewApplications(username, token).catch(e => {
+    let applications = await APIService.getNewApplications(username, token).catch(() => {
         throw new Error("Failed to get new appliations. Please double check your IMAP code, email, and provider or try again later.")
     })
     let promises = applications.map(application => APIService.postApplications(token, username, application.company, application.position, application.status))
     await Promise.all(promises).catch(e => {
         throw new Error(e.message)
-    });
+    })
     let userDetails = await APIService.getUserDetails(username, token)
-    var currentdate = new Date(); 
+    var currentdate = new Date()
     var datetime = (currentdate.getMonth() + 1) + "/"
                     + currentdate.getDate()  + "/" 
                     + currentdate.getFullYear() + " "  
                     + currentdate.getHours() + ":"  
                     + currentdate.getMinutes() + ":" 
-                    + currentdate.getSeconds();
+                    + currentdate.getSeconds()
     await APIService.updateUserDetails(username, token, userDetails.email, datetime, userDetails.imap_password, userDetails.imap_url).catch(e => {
         throw new Error(e.message)
     })

@@ -26,7 +26,7 @@ export default function Confirmation() {
 async function deleteProfile(navigate, username, token) {
     let applications = await APIService.getUserApplications(username, token)
     let promises = applications.map(application => APIService.deleteApplication(token, application.id))
-    await Promise.all(promises);
+    await Promise.all(promises)
     await APIService.deleteUserDetail(username, token)
     await APIService.deleteUser()
     let response = await APIService.getUserDetails(username, token)

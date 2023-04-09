@@ -1,13 +1,13 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
+import React from 'react'
+import ReactDOM from 'react-dom/client'
 import { Route, Routes, BrowserRouter } from 'react-router-dom'
 import Login from './profiles/Login'
 import SignUp from './profiles/SignUp'
 import Refresh from './applications/Refresh'
-import Applications from './applications/Applications';
+import Applications from './applications/Applications'
 import EditApplicationForm from './applications/EditApplicationForm'
 import EditProfileForm from './profiles/EditProfileForm'
-import AddApplicationForm from './applications/AddApplicationForm';
+import AddApplicationForm from './applications/AddApplicationForm'
 import Confirmation from './profiles/Confirmation'
 
 function Router() {
@@ -27,9 +27,9 @@ function Router() {
     )
 }
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
-  <React.StrictMode>
-    <Router />
-  </React.StrictMode>
-);
+	<React.StrictMode>
+		<Router />
+	</React.StrictMode>
+)

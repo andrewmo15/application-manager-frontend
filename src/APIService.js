@@ -10,7 +10,7 @@ export default class APIService {
             },
             body: JSON.stringify({'username': username, "password": password})
         }).then(response => {
-            if (response.ok) return response.json();
+            if (response.ok) return response.json()
             return this.errorHandler(response)
         }).then(response => {
             if ("error" in response) {
@@ -48,21 +48,21 @@ export default class APIService {
             headers: {
                 'Content-Type': 'application/json',
             },
-        });
+        })
     }
 
     /*========== Individual Applications API Methods ==========*/
     // POST /applications
     static postApplications(token, username, company, position, status) {
         return fetch('http://localhost:8000/applications/', {
-        'method': "POST",
-          headers: {
-              'Content-type': 'application/json',
-              'Authorization': 'Token ' + token,
-          },
-          body: JSON.stringify({"username": username, "company": company, "position": position, "status": status})
+            'method': "POST",
+            headers: {
+                'Content-type': 'application/json',
+                'Authorization': 'Token ' + token,
+            },
+            body: JSON.stringify({"username": username, "company": company, "position": position, "status": status})
         }).then(response => {
-            if (response.ok) return null;
+            if (response.ok) return null
             return this.errorHandler(response)
         }).then(error => {
             if (error != null) {
@@ -73,13 +73,13 @@ export default class APIService {
     // GET /applications/id
     static getApplication(token, id) {
         return fetch('http://localhost:8000/applications/' + id, {
-        'method': "GET",
+            'method': "GET",
             headers: {
                 'Content-type': 'application/json',
                 'Authorization': 'Token ' + token,
             }
         }).then(response => {
-            if (response.ok) return response.json();
+            if (response.ok) return response.json()
             return this.errorHandler(response)
         }).then(response => {
             if ("error" in response) {
@@ -99,7 +99,7 @@ export default class APIService {
             },
             body: JSON.stringify({"username": username, "company": company, "position": position, "status": status})
         }).then(response => {
-            if (response.ok) return null;
+            if (response.ok) return null
             return this.errorHandler(response)
         }).then(error => {
             if (error != null) {
@@ -116,7 +116,7 @@ export default class APIService {
                 'Authorization': 'Token ' + token,
             },
         }).then(response => {
-            if (response.ok) return null;
+            if (response.ok) return null
             return this.errorHandler(response)
         }).then(error => {
             if (error != null) {
@@ -141,7 +141,7 @@ export default class APIService {
                 "imap_url": imapURL
             })
         }).then(response => {
-            if (response.ok) return null;
+            if (response.ok) return null
             return this.errorHandler(response)
         }).then(error => {
             if (error != null) {
@@ -158,7 +158,7 @@ export default class APIService {
                 'Authorization': 'Token ' + token,
             },
         }).then(response => {
-            if (response.ok) return response.json();
+            if (response.ok) return response.json()
             return this.errorHandler(response)
         }).then(response => {
             if ("error" in response) {
@@ -184,7 +184,7 @@ export default class APIService {
                 "imap_url": imapURL
             })
         }).then(response => {
-            if (response.ok) return null;
+            if (response.ok) return null
             return this.errorHandler(response)
         }).then(error => {
             if (error != null) {
@@ -202,7 +202,7 @@ export default class APIService {
                 'Authorization': 'Token ' + token,
             }
         }).then(response => {
-            if (response.ok) return null;
+            if (response.ok) return null
             return this.errorHandler(response)
         }).then(error => {
             if (error != null) {
@@ -220,7 +220,7 @@ export default class APIService {
                 'Authorization': 'Token ' + token,
             }
         }).then(response => {
-            if (response.ok) return response.json();
+            if (response.ok) return response.json()
             return this.errorHandler(response)
         }).then(response => {
             if ("error" in response) {
@@ -233,11 +233,11 @@ export default class APIService {
     // GET /newApplications/username
     static getNewApplications(username, token) {
         return fetch('http://localhost:8000/newApplications/' + username, {
-        'method': "GET",
-            headers: {
-                'Content-type': 'application/json',
-                'Authorization': 'Token ' + token,
-            }
+            'method': "GET",
+                headers: {
+                    'Content-type': 'application/json',
+                    'Authorization': 'Token ' + token,
+                }
         }).then(response => response.json())
         .then(response => {
             if ("newApplications" in response) {
@@ -264,12 +264,12 @@ export default class APIService {
     }
 
     static isValidPassword(pw) {
-        return /[A-Z]/.test(pw) && /[a-z]/.test(pw) && /[0-9]/.test(pw) && pw.length > 6;
+        return /[A-Z]/.test(pw) && /[a-z]/.test(pw) && /[0-9]/.test(pw) && pw.length > 6
     }
     
     static isValidEmail(email) {
         return String(email).toLowerCase().match(
           /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-        );
+        )
     }
 }
