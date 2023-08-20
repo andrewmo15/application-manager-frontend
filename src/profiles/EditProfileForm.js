@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { useNavigate, useLocation } from 'react-router-dom'
+import { useNavigate, useLocation, Link } from 'react-router-dom'
 import APIService  from '../APIService'
 import '../style.css'
 
@@ -46,9 +46,15 @@ export default function EditProfileForm() {
                     <label htmlFor="email" className="placeholder">Email</label>
                 </div>
                 <div className="input-container ic2">
-                    <input id="imapPassword" className="input" type="text" placeholder=' ' value={imapPassword} onChange={e => setImapPassword(e.target.value)}/>
-                    <div className="cut"></div>
-                    <label htmlFor="password" className="placeholder">IMAP code</label>
+                    <div className="tooltip-container">
+                        <input id="imapPassword" className="input tooltip-input" type="text" placeholder=' ' value={imapPassword} onChange={e => setImapPassword(e.target.value)}/>
+                        <div className="cut"></div>
+                        <label htmlFor="imapPassword" className="placeholder">IMAP code</label>
+                        <div className="tooltip">
+                            <div className="tooltip-icon"><ion-icon name="help-circle-outline"></ion-icon></div>
+                            <span className="tooltiptext"> To learn more about how to get your IMAP code, click <Link to="/help">here</Link>.</span>
+                        </div>
+                    </div>
                 </div>
                 <div className="input-container ic2">
                     <select id="provider" className="input" value={imapURL} onChange={e => setImapURL(e.target.value)}>

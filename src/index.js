@@ -9,6 +9,7 @@ import EditApplicationForm from './applications/EditApplicationForm'
 import EditProfileForm from './profiles/EditProfileForm'
 import AddApplicationForm from './applications/AddApplicationForm'
 import Confirmation from './profiles/Confirmation'
+import Help from './profiles/Help'
 
 function Router() {
     return (
@@ -22,6 +23,7 @@ function Router() {
                 <Route path="/editProfile/" element={<EditProfileForm/>}/>
                 <Route path="/addApplication/" element={<AddApplicationForm/>}/>
                 <Route path="/confirmation/" element={<Confirmation/>}/>
+                <Route path="/help/" element={<Help/>}/>
             </Routes>
         </BrowserRouter>
     )

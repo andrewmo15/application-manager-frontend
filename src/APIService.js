@@ -3,7 +3,7 @@ export default class APIService {
     /*========== Authentication API Methods ==========*/
     // POST /users
     static signUpUser(username, password) {
-        return fetch('http://localhost:8000/users/', {
+        return fetch(process.env.REACT_APP_API_URL + 'users/', {
             'method': "POST",
             headers: {
                 'Content-Type': 'application/json',
@@ -22,7 +22,7 @@ export default class APIService {
     }
     // POST /auth
     static loginUser(username, password) {
-        return fetch('http://localhost:8000/auth/', {
+        return fetch(process.env.REACT_APP_API_URL + 'auth/', {
             'method': "POST",
             headers: {
                 'Content-Type': 'application/json',
@@ -43,7 +43,7 @@ export default class APIService {
     }
     // DELETE /users/id
     static deleteUser(id) {
-        return fetch('http://localhost:8000/users/' + id, {
+        return fetch(process.env.REACT_APP_API_URL + 'users/' + id, {
             'method': "DELETE",
             headers: {
                 'Content-Type': 'application/json',
@@ -54,7 +54,7 @@ export default class APIService {
     /*========== Individual Applications API Methods ==========*/
     // POST /applications
     static postApplications(token, username, company, position, status) {
-        return fetch('http://localhost:8000/applications/', {
+        return fetch(process.env.REACT_APP_API_URL + 'applications/', {
             'method': "POST",
             headers: {
                 'Content-type': 'application/json',
@@ -72,7 +72,7 @@ export default class APIService {
     }
     // GET /applications/id
     static getApplication(token, id) {
-        return fetch('http://localhost:8000/applications/' + id, {
+        return fetch(process.env.REACT_APP_API_URL + 'applications/' + id, {
             'method': "GET",
             headers: {
                 'Content-type': 'application/json',
@@ -91,7 +91,7 @@ export default class APIService {
     }
     // PUT /applications/id
     static updateApplication(token, id, username, company, position, status) {
-        return fetch('http://localhost:8000/applications/' + id + "/", {
+        return fetch(process.env.REACT_APP_API_URL + 'applications/' + id + "/", {
             'method': "PUT",
             headers: {
                 'Content-type': 'application/json',
@@ -109,7 +109,7 @@ export default class APIService {
     }
     // DELETE /applications/id
     static deleteApplication(token, id) {
-        return fetch('http://localhost:8000/applications/' + id + "/", {
+        return fetch(process.env.REACT_APP_API_URL + 'applications/' + id + "/", {
             'method': "DELETE",
             headers: {
                 'Content-type': 'application/json',
@@ -127,7 +127,7 @@ export default class APIService {
     /*========== User Info API Methods ==========*/
     // POST /userinfo/
     static addUserDetails(username, token, email, last_refresh, imapPassword, imapURL) {
-        return fetch('http://localhost:8000/userinfo/', {
+        return fetch(process.env.REACT_APP_API_URL + 'userinfo/', {
             'method': "POST",
             headers: {
                 'Content-Type': 'application/json',
@@ -151,7 +151,7 @@ export default class APIService {
     }
     // GET /userinfo/username
     static getUserDetails(username, token) {
-        return fetch('http://localhost:8000/userinfo/' + username, {
+        return fetch(process.env.REACT_APP_API_URL + 'userinfo/' + username, {
             'method': "GET",
             headers: {
                 'Content-Type': 'application/json',
@@ -170,7 +170,7 @@ export default class APIService {
     }
     // PUT /userinfo/username
     static updateUserDetails(username, token, email, last_refresh, imapPassword, imapURL) {
-        return fetch('http://localhost:8000/userinfo/' + username + "/", {
+        return fetch(process.env.REACT_APP_API_URL + 'userinfo/' + username + "/", {
             'method': "PUT",
             headers: {
                 'Content-Type': 'application/json',
@@ -195,7 +195,7 @@ export default class APIService {
 
     // DELETE /userinfo/username
     static deleteUserDetail(username, token) {
-        return fetch('http://localhost:8000/userinfo/' + username + "/", {
+        return fetch(process.env.REACT_APP_API_URL + 'userinfo/' + username + "/", {
             'method': "DELETE",
             headers: {
                 'Content-Type': 'application/json',
@@ -213,7 +213,7 @@ export default class APIService {
     /*========== User Applications API Methods ==========*/
     // GET /userApplications/username
     static getUserApplications(username, token) {
-        return fetch('http://localhost:8000/userApplications/' + username, {
+        return fetch(process.env.REACT_APP_API_URL + 'userApplications/' + username, {
             'method': "GET",
             headers: {
                 'Content-type': 'application/json',
@@ -232,7 +232,7 @@ export default class APIService {
     }
     // GET /newApplications/username
     static getNewApplications(username, token) {
-        return fetch('http://localhost:8000/newApplications/' + username, {
+        return fetch(process.env.REACT_APP_API_URL + 'newApplications/' + username, {
             'method': "GET",
                 headers: {
                     'Content-type': 'application/json',

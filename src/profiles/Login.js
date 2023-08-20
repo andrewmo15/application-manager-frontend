@@ -31,7 +31,7 @@ export default function Login() {
                     <label htmlFor="password" className="placeholder">Password</label>
                 </div>
                 <p id="error" className="error"></p>
-                <div className="input-container">
+                <div className="input-container ic1">
                     <button type="text" className="submit" onClick={loginClick}>Login</button>
                 </div>
                 <div className="input-container ic2">

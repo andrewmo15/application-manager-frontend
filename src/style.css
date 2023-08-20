@@ -1,7 +1,7 @@
 html, body, #root { height: 100%; }
 
 body {
-    background-color: #000;
+    background-color: black;
     margin: 0 auto;
 }
 /* ================= forms ================= */
@@ -75,7 +75,6 @@ body {
     font-size: 12px;
     font-weight: 600;
     margin-top: 25px;
-    margin-bottom: 25px;
 }
   
 .input {
@@ -171,6 +170,54 @@ body {
     background-color: rgb(161, 0, 0);
 }
   
+/* ================= tooltip =================== */
+.tooltip-container {
+    display:flex;
+    height: 100%;
+    align-items: center;
+}
+
+.tooltip-input {
+    border-radius: 0;
+    border-top-left-radius: 12px;
+    border-bottom-left-radius: 12px;
+}
+
+.tooltip-icon {
+    color: #eee;
+    font-size: 30px;
+    background-color: #303245;
+    padding-top: 6.5px;
+    padding-bottom: 6.5px;
+    width: 50px;
+    text-align: center;
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+}
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: #303245;
+    color: #fff;
+    text-align: center;
+    padding: 10px 10px;
+    border-radius: 6px;
+    position: absolute;
+    z-index: 2;
+    top: -5px;
+    left: 105%;
+    font-family: sans-serif;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+}
 
 /* ================= toolbar and table div ================= */
 .header-container {
@@ -275,4 +322,61 @@ thead, th {
 
 .table-buttons:hover {
     background-color: #15172b;
+}
+
+/* =============== accordian ================ */
+.accordian-container {
+    background-color: #15172b;
+    margin-top: 5%;
+    margin-left: 10%;
+    margin-right: 10%;
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-top: 5%;
+    padding-bottom: 5%;
+    border-radius: 20px;
+}
+h1 {
+    width: 100%;
+    text-align: center;
+    color: white;
+}
+
+.accordian-item {
+    margin: 10px 0;
+    border-radius: 10px;
+    background-color: #303245;
+}
+
+.accordian-item-header {
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+    height: 50px;
+    line-height: 50px;
+    align-items: center;
+    padding-left: 30px;
+}
+
+.accordian-item-header::after {
+    content: "\25BE";
+    font-size: 2rem;
+    position: absolute;
+    right: 17%;
+    transition: transform 0.2s ease-in-out;
+}
+
+.accordian-item-header.active::after {
+    transform: rotate(180deg);
+}
+
+.accordian-item-body {
+    padding-left: 2%;
+    padding-right: 2%;
+    background-color: white;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
 }
