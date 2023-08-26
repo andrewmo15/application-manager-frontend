@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import APIService  from '../APIService'
+import ApplicationCards from './ApplicationCards'
+import ApplicationTable from './ApplicationTable'
 import '../style.css'
 
 export default function Applications() {
@@ -14,7 +16,7 @@ export default function Applications() {
 
     useEffect(() => {
         APIService.getUserApplications(username, token)
-        .then(applications => setApplications(applications))
+        .then(applications => setApplications(applications.reverse()))
         .catch(e => setApplicationsError(e.message))
 
         APIService.getUserDetails(username, token)
@@ -23,72 +25,51 @@ export default function Applications() {
     }, [username, token])
   
     return (
-		<div>
+		<div className="container">
 			<div className="header-container">
 				<div className="header-name">
-					<h1> Your applications </h1>
+					Track
 				</div>
 				<div style={{display:"flex", flexDirection: "row"}}>
-					<button className="header-buttons" onClick={() => navigate('/editProfile', {state: {username: username, token: token}})}> Edit Profile </button>
+					<button className="header-buttons" onClick={() => navigate('/editProfile', {state: {username: username, token: token}})}> Profile </button>
 					<button className="header-buttons" onClick={() => navigate('/')}> Logout </button>
 				</div>
 			</div>
+			{ applications.length > 0 ? (
+				<ApplicationCards apps={applications.slice(0,5)} username={username} token={token}/>
+			) : (<div/>) }
 			{!applicationsError ? (
-				<div className="apps">
-					<div className="toolbar">
-						<input id="search" className="search" type="text" placeholder='Search company, position, or status' onChange={filter}></input>
-						<button className="toolbar-icons" onClick={() => navigate('/addApplication', {state: {username: username, token: token}})}> <ion-icon name="add-outline"></ion-icon> </button>
-						<button className="toolbar-icons" onClick={() => navigate('/refresh', {state: {username: username, token: token}})}> <ion-icon name="refresh-circle-outline"></ion-icon> </button>
+				<div>
+					<div className="table-header-container">
+						<h2>Your Applications</h2>
+						<div style={{display:"flex", flexDirection: "row"}}>
+							<button className="table-header-buttons" onClick={() => navigate('/addApplication', {state: {username: username, token: token}})}> 
+								<ion-icon name="add-outline"></ion-icon>
+								<span> Add Application </span>
+							</button>
+							<button className="table-header-buttons" onClick={() => navigate('/refresh', {state: {username: username, token: token}})}> 
+								<ion-icon name="refresh-circle-outline"></ion-icon>
+								<span> Refresh </span>
+							</button>
+						</div>
 					</div>
-					<div>
-						{applications.length > 0 ? (
-							<div>
-								<table id="applicationTable">
-									<thead>
-										<tr>
-										<th>Company</th>
-										<th>Position</th>
-										<th>Status</th>
-										<th>Action</th>
-										</tr>
-									</thead>
-									<tbody>
-										{applications.map((application) => {
-											return (
-											<tr key={application.id}>
-												<td>{application.company}</td>
-												<td>{application.position}</td>
-												<td>{application.status}</td>
-												<td><button className="table-buttons" onClick={() => navigate('/editApplication', {state: {username: username, token: token, id: application.id}})}>Edit</button></td>
-											</tr>
-											)
-										})}
-									</tbody>
-								</table>
-								<div>
-									{ !refreshError ? (
-										<div className="subtitle" style={{marginLeft: "2%"}}> Last refresh: {last_refresh}</div>
-									) : (
-										<div className="subtitle" style={{marginLeft: "2%"}}>{refreshError}</div>
-									)}
-								</div>
-							</div>
-						) : (
-							<div>
-								<div className="subtitle" style={{marginLeft: "2%"}}> No applications yet! Add some applications or try refreshing. </div>
-								<div>
-									{ !refreshError ? (
-										<div className="subtitle" style={{marginLeft: "2%"}}> Last refresh: {last_refresh}</div>
-									) : (
-										<div className="subtitle" style={{marginLeft: "2%"}}>{refreshError}</div>
-									)}
-								</div>
-							</div>
-						)}
-					</div>
+					{applications.length > 0 ? (
+						<div>
+							<input id="search" className="search" type="text" placeholder='Search company, position, or status' onChange={filter}></input>
+							<ApplicationTable applications={applications} username={username} token={token}/>
+						</div>
+					) : (
+						<div className="subtitle" style={{marginLeft: "2%"}}> No applications yet! Add some applications or try refreshing. </div>
+					)}
 				</div>
 			) : (
 				<div className="subtitle" style={{marginLeft: "2%"}}> {applicationsError} </div>
+			)}
+
+			{ !refreshError ? (
+				<div className="refreshText"> Last refresh: {last_refresh}</div>
+			) : (
+				<div className="refreshText">{refreshError}</div>
 			)}
 		</div>
   	)

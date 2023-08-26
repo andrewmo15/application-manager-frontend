@@ -8,16 +8,14 @@ export default function Confirmation() {
     let navigate = useNavigate()
 
     return (
-        <div className="form-container small">
-            <div className="form">
+        <div className="form confirmation">
+            <div className="form-contents">
+                <div className='logo'>Track</div>
                 <div className="title">Are you sure?</div>
+                <div className="subtitle">This action cannot be undone.</div>
                 <p id="error" className="error"></p>
-                <div className="input-container ic2">
-                    <button type="text" className="destroy" onClick={() => deleteProfile(navigate, username, token)}> Yes </button>
-                </div>
-                <div className="input-container ic2">
-                    <button type="text" className="submit" onClick={() => navigate('/editProfile', {state: {username: username, token: token}})}> No </button>
-                </div>
+                <button type="text" className="form-button destroy" onClick={() => deleteProfile(navigate, username, token)}> Yes </button>
+                <button type="text" className="form-button submit" onClick={() => navigate('/editProfile', {state: {username: username, token: token}})}> No </button>
             </div>
         </div>
     )

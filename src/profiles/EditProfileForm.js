@@ -25,9 +25,15 @@ export default function EditProfileForm() {
 
     const saveClick = () => {
         let error = document.getElementById("error")
-        if (!APIService.isValidEmail(email)){
+        if (email.length === 0 && imapPassword.length === 0) {
+            error.innerHTML = "Please enter your email and your IMAP password."
+        } else if (email.length === 0) {
+            error.innerHTML = "Please enter your email."
+        } else if (imapPassword.length === 0) {
+            error.innerHTML = "Please enter your IMAP password."
+        } else if (!APIService.isValidEmail(email)) {
             error.innerHTML = "Please enter a valid email."
-        } else {
+        } else if (imapPassword.length > 0) {
             APIService.updateUserDetails(username, token, email, lastRefresh, imapPassword, imapURL)
             .then(() => navigate('/applications', {state: {username: username, token: token}}))
             .catch(e => error.innerHTML = e.message)
@@ -37,15 +43,16 @@ export default function EditProfileForm() {
     const deleteClick = () => navigate('/confirmation', {state: {username: username, token: token}})
 
     return (
-        <div className="form-container forms">
-            <div className="form">
+        <div className="form editprofile">
+            <div className="form-contents">
+                <div className='logo'>Track</div>
                 <div className="title">Edit Profile</div>
-                <div className="input-container ic1">
+                <div className="input-container">
                     <input id="email" className="input" type="text" placeholder=' ' value={email} onChange={e => setEmail(e.target.value)}/>
                     <div className="cut cut-short"></div>
                     <label htmlFor="email" className="placeholder">Email</label>
                 </div>
-                <div className="input-container ic2">
+                <div className="input-container">
                     <div className="tooltip-container">
                         <input id="imapPassword" className="input tooltip-input" type="text" placeholder=' ' value={imapPassword} onChange={e => setImapPassword(e.target.value)}/>
                         <div className="cut"></div>
@@ -56,7 +63,7 @@ export default function EditProfileForm() {
                         </div>
                     </div>
                 </div>
-                <div className="input-container ic2">
+                <div className="input-container">
                     <select id="provider" className="input" value={imapURL} onChange={e => setImapURL(e.target.value)}>
                         <option value="imap.gmail.com"> Gmail </option>
                         <option value="imap-mail.outlook.com"> Outlook </option>
@@ -68,13 +75,9 @@ export default function EditProfileForm() {
                     <div className="cut"></div>
                     <label htmlFor="provider" className="placeholder">Provider</label>
                 </div>
-                <p id="error" className="error"></p>
-                <div className="input-container ic2">
-                    <button type="text" className="submit" onClick={saveClick}> Save</button>
-                </div>
-                <div className="input-container ic2">
-                    <button type="text" className="destroy" onClick={deleteClick}>Delete Profile</button>
-                </div>
+                <div id="error" className="error"></div>
+                <button type="text" className="form-button submit" onClick={saveClick}> Save</button>
+                <button type="text" className="form-button destroy" onClick={deleteClick}>Delete Profile</button>
             </div>
         </div>
     )

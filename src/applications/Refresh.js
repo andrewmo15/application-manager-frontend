@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import APIService from '../APIService'
+import { TailSpin } from 'react-loader-spinner'
 import '../style.css'
 
 export default function Refresh() {
@@ -18,14 +19,16 @@ export default function Refresh() {
     }, [navigate, username, token])
 
     return (
-        <div className="form-container small">
-            <div className="form">
+        <div className="form refresh">
+            <div className="form-contents"> 
+                <div className='logo'>Track</div>
                 <div className="title">Fetching latest emails...</div>
-                <div className="subtitle">Please be patient</div>
-                <p id="error" className="error"></p>
-                <div className="input-container ic2">
-                    <button id="continue" type="text" className="submit" style={{visibility: "hidden"}} onClick={() => navigate('/applications', {state: {username: username, token: token}})}> Continue </button>
+                <div className="subtitle">This may take some time if you have a lot of emails. Please be patient.</div>
+                <div className="spinner">
+                    <TailSpin color="#404089"/>
                 </div>
+                <div id="error" className="error"></div>
+                <button type="text" className="form-button submit" onClick={() => navigate('/applications', {state: {username: username, token: token}})}>Skip</button>
             </div>
         </div>
     )

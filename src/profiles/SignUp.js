@@ -19,26 +19,27 @@ export default function SignUp() {
     })
     
     return (
-        <div className="form-container signup">
-            <div className="form">
+        <div className="form signup">
+            <div className='form-contents'>
+                <div className='logo'>Track</div>
                 <div className="title">Welcome!</div>
                 <div className="subtitle">Let's create your account</div>
-                <div className="input-container ic1">
+                <div className="input-container">
                     <input id="username" className="input" type="text" placeholder=' ' value={username} onChange={e => setUsername(e.target.value)}/>
                     <div className="cut"></div>
                     <label htmlFor="username" className="placeholder">Username</label>
                 </div>
-                <div className="input-container ic2">
+                <div className="input-container">
                     <input id="email" className="input" type="text" placeholder=' ' value={email} onChange={e => setEmail(e.target.value)}/>
                     <div className="cut cut-short"></div>
                     <label htmlFor="email" className="placeholder">Email</label>
                 </div>
-                <div className="input-container ic2">
+                <div className="input-container">
                     <input id="password" className="input" type="password" placeholder=' ' value={password} onChange={e => setPassword(e.target.value)}/>
                     <div className="cut"></div>
                     <label htmlFor="password" className="placeholder">Password</label>
                 </div>
-                <div className="input-container ic2">
+                <div className="input-container">
                     <div className="tooltip-container">
                         <input id="imapPassword" className="input tooltip-input" type="text" placeholder=' ' value={imapPassword} onChange={e => setImapPassword(e.target.value)}/>
                         <div className="cut"></div>
@@ -49,7 +50,7 @@ export default function SignUp() {
                         </div>
                     </div>
                 </div>
-                <div className="input-container ic2">
+                <div className="input-container">
                     <select id="provider" className="input" value={imapURL} onChange={e => setImapURL(e.target.value)}>
                         <option value="imap.gmail.com"> Gmail </option>
                         <option value="imap-mail.outlook.com"> Outlook </option>
@@ -61,16 +62,14 @@ export default function SignUp() {
                     <div className="cut"></div>
                     <label htmlFor="provider" className="placeholder">Provider</label>
                 </div>
-                <div className="subtitle datetitle">When did you start applying?</div>
-                <div className="input-container ic2">
+                <div className="datetitle">When did you start applying?</div>
+                <div className="input-container">
                     <input id="date" className="input" type="date" placeholder=' ' value={date} onChange={e => setDate(e.target.value)}/>
                     <div className="cut"></div>
                     <label htmlFor="date" className="placeholder"> Date </label>
                 </div>
-                <p id="error" className="error"></p>
-                <div className="input-container ic2">
-                    <button type="text" className="submit" onClick={signupClick}>Sign Up</button>
-                </div>
+                <div id="error" className="error"></div>
+                <button type="text" className="form-button submit" onClick={signupClick}>Sign Up</button>
             </div>
         </div>
     )

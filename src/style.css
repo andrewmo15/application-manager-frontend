@@ -1,97 +1,122 @@
-html, body, #root { height: 100%; }
+@import url("https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+:root {
+	--c-text-primary: #282a32;
+	--c-text-secondary: #686b87;
+	--c-text-action: #404089;
+	--c-accent-primary: #434ce8;
+	--c-border-primary: #eff1f6;
+	--c-background-primary: #ffffff;
+	--c-background-secondary: #fdfcff;
+	--c-background-tertiary: #ecf3fe;
+    --blue: #0000ff;
+    --error-red: #dc2f55;
+    --form-submit: #08d;
+    --form-submit-hover: #0070b5;
+    --form-destroy: #ff0000;
+    --form-destroy-hover: #a10000;
+}
 
 body {
-    background-color: black;
-    margin: 0 auto;
+    background-color: var(--c-background-secondary);
+    font-family: "Be Vietnam Pro", sans-serif;
 }
+
 /* ================= forms ================= */
-.form-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.form {
+    background-color: var(--c-background-primary);
+    border-radius: 10px;
+    padding: 20px;
+    border: 1px solid var(--c-border-primary);
+    align-content: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 15%);
+    width: 450px;
+    margin-left: max(0px, calc((100vw - 450px) / 2));
 }
 
 .login {
-    height: max(100%, 520px);
+    height: 600px;
+    margin-top: max(0px, calc((100vh - 550px) / 2));
 }
 
 .signup {
-    height: max(100%, 850px);
+    height: 950px;
+    margin-top: max(0px, calc((100vh - 900px) / 2));
 }
 
-.small {
-    height: max(100%, 315px)
+.refresh {
+    height: 550px;
+    margin-top: max(0px, calc((100vh - 500px) / 2));
 }
 
-.forms {
-    height: max(100%, 630px)
+.editprofile {
+    height: 650px;
+    margin-top: max(0px, calc((100vh - 600px) / 2));
 }
-  
-.form {
-    background-color: #15172b;
-    border-radius: 20px;
-    box-sizing: border-box;
-    padding: 20px;
-    width: 320px;
+
+.confirmation {
+    height: 450px;
+    margin-top: max(0px, calc((100vh - 400px) / 2));
+}
+
+.form-contents {
+    width: 80%;
+    margin-left: 10%;
+}
+
+.logo {
+    margin-top: 50px;
+    color: var(--c-text-action);
+    font-family: inherit;
+    font-size: 25px;
+    font-weight: 500;
+    width: 100%;
+    text-align: center;
 }
 
 .title {
-    color: #eee;
-    font-family: sans-serif;
+    color: var(--c-text-primary);
+    font-family: inherit;
     font-size: 36px;
-    font-weight: 600;
-    margin-top: 15px;
+    margin-top: 20px;
+    text-align: center;
 }
   
 .subtitle {
-    color: #eee;
-    font-family: sans-serif;
+    color: var(--c-text-primary);
+    font-family: inherit;
     font-size: 16px;
-    font-weight: 600;
     margin-top: 10px;
+    text-align: center;
+    margin-bottom: 80px;
 }
 
 .datetitle {
-    margin-top: 30px;
+    font-family: inherit;
+    margin-top: 20px;
+    margin-left: 5px;
+    color: var(--c-text-secondary);
 }
   
 .input-container {
     height: 50px;
     position: relative;
-    width: 100%;
-}
-  
-.ic1 {
     margin-top: 40px;
 }
   
-.ic2 {
-    margin-top: 30px;
-}
-
-.error {
-    color: #dc2f55;
-    font-family: sans-serif;
-    font-size: 12px;
-    font-weight: 600;
-    margin-top: 25px;
-}
-  
 .input {
-    background-color: #303245;
-    border-radius: 12px;
-    border: 0;
-    box-sizing: border-box;
-    color: #eee;
+    border: 1px solid var(--c-border-primary);
+    border-radius: 10px;
+    color: var(--c-text-primary);
     font-size: 18px;
+    width: 95%;
     height: 100%;
-    outline: 0;
-    padding: 4px 20px 0;
-    width: 100%;
+    padding-left: 5%;
+    font-family: inherit;
 }
   
 .cut {
-    background-color: #15172b;
+    background-color: var(--c-background-primary);
     border-radius: 10px;
     height: 20px;
     left: 20px;
@@ -105,15 +130,16 @@ body {
 .cut-short {
     width: 50px;
 }
-  
+.input:focus {
+    border: 2px solid var(--c-text-action);
+}
 .input:focus ~ .cut,
 .input:not(:placeholder-shown) ~ .cut {
     transform: translateY(8px);
 }
   
 .placeholder {
-    color: #65657b;
-    font-family: sans-serif;
+    color: var(--c-text-secondary);
     left: 20px;
     line-height: 14px;
     pointer-events: none;
@@ -129,45 +155,59 @@ body {
 }
   
 .input:not(:placeholder-shown) ~ .placeholder {
-    color: #808097;
+    color: var(--c-text-secondary);
 }
   
 .input:focus ~ .placeholder {
-    color: #dc2f55;
+    color: var(--blue);
+}
+
+.error {
+    color: var(--error-red);
+    font-family: inherit;
+    font-size: 12px;
+    margin-top: 25px;
+}
+
+.signupText {
+    margin-top: 20px;
+    text-align: center;
 }
   
-.submit {
-    background-color: #08d;
+.form-button {
     border-radius: 12px;
     border: 0;
     box-sizing: border-box;
-    color: #eee;
+    color: var(--c-background-primary);
     cursor: pointer;
+    font-family: inherit;
     font-size: 18px;
     height: 50px;
     text-align: center;
     width: 100%;
+    margin-top: 20px;
+}
+
+.submit {
+    background-color: var(--form-submit);
 }
 
 .submit:hover {
-    background-color: rgb(0, 112, 181);
+    background-color: var(--form-submit-hover);
 }
   
 .destroy {
-    background-color: red;
-    border-radius: 12px;
-    border: 0;
-    box-sizing: border-box;
-    color: #eee;
-    cursor: pointer;
-    font-size: 18px;
-    height: 50px;
-    text-align: center;
-    width: 100%;
+    background-color: var(--form-destroy);
 }
 
 .destroy:hover {
-    background-color: rgb(161, 0, 0);
+    background-color: var(--form-destroy-hover);
+}
+
+.spinner {
+    width: 100%;
+    display: flex;
+    justify-content: center;
 }
   
 /* ================= tooltip =================== */
@@ -184,15 +224,15 @@ body {
 }
 
 .tooltip-icon {
-    color: #eee;
+    color: var(--c-border-primary);
     font-size: 30px;
-    background-color: #303245;
     padding-top: 6.5px;
     padding-bottom: 6.5px;
     width: 50px;
     text-align: center;
-    border-top-right-radius: 12px;
-    border-bottom-right-radius: 12px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border: 1px solid var(--c-border-primary);
 }
 
 .tooltip {
@@ -203,93 +243,123 @@ body {
 .tooltip .tooltiptext {
     visibility: hidden;
     width: 120px;
-    background-color: #303245;
-    color: #fff;
+    background-color: var(--c-background-secondary);
+    border-radius: 10px;
+    border: 1px solid var(--c-border-primary);
+    color: black;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 15%);
     text-align: center;
     padding: 10px 10px;
-    border-radius: 6px;
     position: absolute;
     z-index: 2;
     top: -5px;
     left: 105%;
-    font-family: sans-serif;
+    font-family: inherit;
 }
 
 .tooltip:hover .tooltiptext {
     visibility: visible;
 }
 
-/* ================= toolbar and table div ================= */
+/* ================= header ================= */
 .header-container {
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
-    background-color: #15172b;
     height: 70px;
+    border-bottom: 1px solid var(--c-border-primary);
+	background-color: var(--c-background-primary);
 }
 
 .header-name {
-    padding: 0 20px;
-    color: white;
-    font-family: sans-serif;
+    margin: auto;
+    padding: 25px 20px;
+    color: var(--c-text-action);
+    font-family: inherit;
+    font-size: 25px;
+    font-weight: 500;
+    width: 100%;
 }
 
 .header-buttons {
-    background-color: #15172b;
+    background-color: var(--c-background-primary);
+    padding: 30px 20px;
     border: 0px;
-    box-sizing: border-box;
-    color: #eee;
-    font-size: 18px;
+    color: var(--c-text-action);
+    font-family: inherit;
+    font-size: 15px;
     height: 100%;
     text-align: center;
-    width: 120px;
     cursor: pointer;
+    border-bottom: 3px solid transparent;
 }
 
 .header-buttons:hover {
-    background-color: #303245;
+    color: var(--c-accent-primary);
+	border-bottom-color: var(--c-accent-primary);
 }
 
-.toolbar-icons {
-    background-color: #303245;
-    height: 100%;
-    width: 100px;
+/* ================= application ==================*/
+.container {
+    margin-left: 10%;
+    width: 80%;
+}
+
+h2 {
+    font-size: 32px;
+    margin-bottom: 1em;
+    font-family: inherit;
+}
+
+.refreshText {
+    color: var(--c-text-action);
+    font-family: inherit;
+    margin-top: 20px;
+    margin-left: 20px;
+}
+
+/* ================= table-header ================= */
+
+.table-header-container {
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    height: 70px;
+    background-color: var(--c-background-secondary);
+    margin-top: 5%;
+}
+
+.table-header-buttons {
+    margin: auto;
+    background-color: var(--c-background-primary);
     border: 0px;
     box-sizing: border-box;
-    color: #eee;
-    font-size: 2em;
+    color: var(--c-text-action);
+    font-family: inherit;
+    font-size: 15px;
+    height: 60%;
     text-align: center;
     cursor: pointer;
+    border: 2px solid var(--c-border-primary);
+    border-radius: 10px;
+    margin-left: 10px;
 }
 
-.toolbar-icons:hover {
-    background-color: #15172b;
-}
-
-/* ================= toolbar and table div ================= */
-.apps {
-    margin-left: 1%;
-    width: 98%;
-}
-
-/* ================= toolbar styling ================= */
-.toolbar {
-    margin-top: 10px;
-    margin-bottom: 10px;
-    display: flex;
-    align-items: center;
-    background-color: #303245;
-    height: 70px;
-    border-radius: 20px;
-    padding: 0 20px;
+.table-header-buttons:hover {
+    border-color: var(--c-accent-primary);
+	color: var(--c-accent-primary);
 }
 
 .search {
-    width: 100%;
+    width: 98%;
     height: 30px;
     border-radius: 10px;
+    margin-top: 10px;
     margin-right: 20px;
     padding-left: 10px;
+    border: 2px solid var(--c-border-primary);
+    font-family: inherit;
+    font-size: 12px;
 }
 
 /* ================= table styling ================= */
@@ -297,31 +367,128 @@ table {
 	width: 100%;
 	border-collapse: collapse;
     text-align: center;
-    font-family: sans-serif;
-	color: #fff;
+    font-family: inherit;
+	color: #282a32;
+    border: 2px solid var(--c-border-primary);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 15%);
+    font-size: 14px;
 }
 
 th, td {
 	height: 50px;
-	background-color: #303245;
+	background-color: var(--c-background-primary);
 }
 
-thead, th {
-	background-color: #15172b;
+tr {
+    border: 2px solid var(--c-border-primary);
 }
 
 .table-buttons {
-    background-color: #303245;
     border: 0px;
-    color: #eee;
-    font-size: 15px;
     height: 100%;
-    width: 65%;
+    width: 100%;
     cursor: pointer;
+    font-family: inherit;
+    font-weight: 500;
+    color: var(--c-text-action);
+    background-color: transparent;
 }
 
 .table-buttons:hover {
-    background-color: #15172b;
+    background-color: var(--c-background-tertiary);
+    color: var(--c-accent-primary);
+}
+
+/* =============== cards =================*/
+.cards {
+    display: grid;
+    grid-auto-columns: 100%;
+    grid-column-gap: 10px;
+    grid-auto-flow: column;
+    padding: 25px 0px;
+    list-style: none;
+    overflow-x: scroll;
+    scroll-snap-type: x mandatory;
+}
+
+.card {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px;
+    background: var(--white);
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 15%);
+    scroll-snap-align: start;
+    transition: all 0.2s;
+    text-align: center;
+    font-family: inherit;
+}
+
+.card:hover {
+    background: var(--c-background-primary);
+    cursor: pointer;
+}
+
+.card .card-content {
+    width: 100%;
+}
+
+.card .card-status {
+    width: 50%;
+    border-radius: 12px;
+    height: 30px;
+    line-height: 30px;
+    margin: auto;
+    font-size: 14px;
+}
+
+.card .card-title {
+    font-size: 20px;
+}
+
+.card .card-subtitle {
+    margin: 30px 0;
+    max-width: 100%;
+    font-size: 14px;
+}
+
+.cards::-webkit-scrollbar {
+    height: 12px;
+}
+
+.cards::-webkit-scrollbar-thumb,
+.cards::-webkit-scrollbar-track {
+    border-radius: 92px;
+}
+
+.cards::-webkit-scrollbar-thumb {
+    background: var(--c-text-action);
+}
+
+.cards::-webkit-scrollbar-track {
+    background: var(--thumb);
+}
+
+@media (min-width: 500px) {
+    .cards {
+        grid-auto-columns: calc(50% - 10px);
+        grid-column-gap: 20px;
+    }
+}
+
+@media (min-width: 700px) {
+    .cards {
+        grid-auto-columns: calc(calc(100% / 3) - 20px);
+        grid-column-gap: 30px;
+    }
+}
+
+@media (min-width: 1100px) {
+    .cards {
+        grid-auto-columns: calc(25% - 30px);
+        grid-column-gap: 40px;
+    }
 }
 
 /* =============== accordian ================ */
@@ -336,6 +503,7 @@ thead, th {
     padding-bottom: 5%;
     border-radius: 20px;
 }
+
 h1 {
     width: 100%;
     text-align: center;

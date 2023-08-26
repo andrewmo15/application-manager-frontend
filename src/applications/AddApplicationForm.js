@@ -22,20 +22,21 @@ export default function AddApplicationForm() {
         navigate('/applications', {state: {username: username, token: token}})
     }
     return (
-        <div className="form-container forms">
-            <div className="form">
-                <div className="title">Application Form</div>
-                <div className="input-container ic1">
+        <div className="form editprofile">
+            <div className="form-contents">
+                <div className='logo'>Track</div>
+                <div className="title">Add Application</div>
+                <div className="input-container">
                     <input id="company" className="input" type="text" placeholder=' ' value={company} onChange={e => setCompany(e.target.value)}/>
                     <div className="cut"></div>
                     <label htmlFor="company" className="placeholder">Company</label>
                 </div>
-                <div className="input-container ic2">
+                <div className="input-container">
                     <input id="position" className="input" type="text" placeholder=' ' value={position} onChange={e => setPosition(e.target.value)}/>
                     <div className="cut"></div>
                     <label htmlFor="position" className="placeholder">Position</label>
                 </div>
-                <div className="input-container ic2">
+                <div className="input-container">
                     <select id="status" className="input" name="status" onChange={e => setStatus(e.target.value)}>
                       	<option value="Rejected"> Rejected </option>
                       	<option value="Submitted"> Submitted </option>
@@ -43,13 +44,9 @@ export default function AddApplicationForm() {
 						<div className="cut"></div>
 						<label htmlFor="status" className="placeholder">Status</label>
                 </div>
-                <p id="error" className="error"></p>
-                <div className="input-container ic2">
-                    <button type="text" className="submit" onClick={saveChanges}>Save</button>
-                </div>
-                <div className="input-container ic2">
-                    <button type="text" className="submit" onClick={cancel}>Cancel</button>
-                </div>
+                <div id="error" className="error"></div>
+                <button type="text" className="form-button submit" onClick={saveChanges}>Save</button>
+                <button type="text" className="form-button submit" onClick={cancel}>Cancel</button>
             </div>
         </div>
     )
