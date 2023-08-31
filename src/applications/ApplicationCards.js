@@ -6,16 +6,16 @@ export default function ApplicationCards(props) {
     return (
         <div>
             <h2>Recent Activity</h2>
-            <ul class="cards">
+            <ul className="cards">
                 {props.apps.map(application => {
                     return (
-                        <li class="card" onClick={() => navigate('/editApplication', {state: {username: props.username, token: props.token, id: application.id}})}>
-                            <div class="card-content">
-                                <div class="card-status" style={{ "background-color": (application.status === "Rejected" ? "#FFB7B7" : "#bcffbc"), "color": application.status === "Rejected" ? "red" : "green" }}>
+                        <li key={application.id} className="card" onClick={() => navigate('/editApplication', {state: {user_id: props.user_id, token: props.token, id: application.id}})}>
+                            <div className="card-content">
+                                <div className="card-status" style={{ "backgroundColor": (application.status === "Rejected" ? "#FFB7B7" : "#bcffbc"), "color": application.status === "Rejected" ? "red" : "green" }}>
                                     {application.status}
                                 </div>
-                                <h3 class="card-title">{application.company}</h3>
-                                <div class="card-subtitle">
+                                <h3 className="card-title">{application.company}</h3>
+                                <div className="card-subtitle">
                                     {application.position}
                                 </div>
                             </div>

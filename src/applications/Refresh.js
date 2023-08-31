@@ -6,17 +6,16 @@ import '../style.css'
 
 export default function Refresh() {
     const { state } = useLocation()
-    const { username, token } = state
+    const { user_id, token } = state
     let navigate = useNavigate()
-
     useEffect(() => {
-        update(navigate, username, token).catch(e => {
+        update(navigate, user_id, token).catch(e => {
             let error = document.getElementById("error")
             let button = document.getElementById("continue")
             error.innerHTML = e.message
             button.style.visibility = "visible"
         })
-    }, [navigate, username, token])
+    }, [navigate, user_id, token])
 
     return (
         <div className="form refresh">
@@ -28,31 +27,26 @@ export default function Refresh() {
                     <TailSpin color="#404089"/>
                 </div>
                 <div id="error" className="error"></div>
-                <button type="text" className="form-button submit" onClick={() => navigate('/applications', {state: {username: username, token: token}})}>Skip</button>
+                <button type="text" className="form-button submit" onClick={() => navigate('/applications', {state: {user_id: user_id, token: token}})}>Skip</button>
             </div>
         </div>
     )
 }
 
-async function update(navigate, username, token) {
-    let applications = await APIService.getNewApplications(username, token).catch(() => {
-        throw new Error("Failed to get new appliations. Please double check your IMAP code, email, and provider or try again later.")
+async function update(navigate, user_id, token) {
+    let applications = await APIService.getNewApplications(user_id, token).catch((e) => {
+        console.log(e)
     })
-    let promises = applications.map(application => APIService.postApplications(token, username, application.company, application.position, application.status))
+    let promises = applications.map(application => APIService.postApplications(token, user_id, application.company, application.position, application.status))
     await Promise.all(promises).catch(e => {
         throw new Error(e.message)
     })
-    let userDetails = await APIService.getUserDetails(username, token)
     var currentdate = new Date()
-    var datetime = (currentdate.getMonth() + 1) + "/"
-                    + currentdate.getDate()  + "/" 
-                    + currentdate.getFullYear() + " "  
-                    + currentdate.getHours() + ":"  
-                    + currentdate.getMinutes() + ":" 
-                    + currentdate.getSeconds()
-    await APIService.updateUserDetails(username, token, userDetails.email, datetime, userDetails.imap_password, userDetails.imap_url).catch(e => {
+    var datetime = currentdate.getFullYear() + "-" + (currentdate.getMonth() + 1) + "-" + currentdate.getDate()
+    let user = await APIService.getUserDetails(user_id, token)
+    await APIService.updateUserDetails(user_id, user.email, token, datetime, user.email_type).catch(e => {
         throw new Error(e.message)
     })
-    navigate('/applications', {state: {username: username, token: token}})
+    navigate('/applications', {state: {user_id: user_id, token: token}})
 }
 

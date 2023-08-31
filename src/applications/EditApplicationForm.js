@@ -5,7 +5,7 @@ import '../style.css'
 
 export default function EditApplicationForm() {
 	const { state } = useLocation()
-	const { username, token, id } = state
+	const { user_id, token, id } = state
 	const [company, setCompany] = useState("")
 	const [position, setPosition] = useState("")
 	const [status, setStatus] = useState("")
@@ -24,15 +24,15 @@ export default function EditApplicationForm() {
 
 	const saveChanges = () => {
 		let error = document.getElementById("error")
-		APIService.updateApplication(token, id, username, company, position, status)
-		.then(() => navigate('/applications', {state: {username: username, token: token}}))
+		APIService.updateApplication(token, id, user_id, company, position, status)
+		.then(() => navigate('/applications', {state: {user_id: user_id, token: token}}))
 		.catch(e => error.innerHTML = e.message)
 	}
 
 	const deleteClick = () => {
 		let error = document.getElementById("error")
 		APIService.deleteApplication(token, id)
-		.then(() => navigate('/applications', {state: {username: username, token: token}}))
+		.then(() => navigate('/applications', {state: {user_id: user_id, token: token}}))
 		.catch(e => error.innerHTML = e.message)
 	}
   

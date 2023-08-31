@@ -5,7 +5,7 @@ import '../style.css'
 
 export default function AddApplicationForm() {
     const { state } = useLocation()
-    const { username, token } = state
+    const { user_id, token } = state
     const [company, setCompany] = useState("")
     const [position, setPosition] = useState("")
     const [status, setStatus] = useState("Rejected")
@@ -13,13 +13,13 @@ export default function AddApplicationForm() {
 
     const saveChanges = () => {
         let error = document.getElementById("error")
-        APIService.postApplications(token, username, company, position, status)
-        .then(() => navigate('/applications', {state: {username: username, token: token}}))
+        APIService.postApplications(token, user_id, company, position, status)
+        .then(() => navigate('/applications', {state: {user_id: user_id, token: token}}))
         .catch(e => error.innerHTML = e.message)
     }
 
     const cancel = () => {
-        navigate('/applications', {state: {username: username, token: token}})
+        navigate('/applications', {state: {user_id: user_id, token: token}})
     }
     return (
         <div className="form editprofile">

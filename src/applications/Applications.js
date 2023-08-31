@@ -7,7 +7,7 @@ import '../style.css'
 
 export default function Applications() {
     const { state } = useLocation()
-    const { username, token } = state
+    const { user_id, token } = state
     const [applications, setApplications] = useState([])
     const [last_refresh, setLastRefresh] = useState("")
     const [applicationsError, setApplicationsError] = useState("")
@@ -15,14 +15,16 @@ export default function Applications() {
     let navigate = useNavigate()
 
     useEffect(() => {
-        APIService.getUserApplications(username, token)
-        .then(applications => setApplications(applications.reverse()))
+        APIService.getUserApplications(user_id, token)
+        .then(applications => {
+			setApplications(applications.reverse())
+		})
         .catch(e => setApplicationsError(e.message))
 
-        APIService.getUserDetails(username, token)
+        APIService.getUserDetails(user_id, token)
         .then(response => setLastRefresh(response["last_refresh"]))
         .catch(e => setRefreshError(e.message))
-    }, [username, token])
+    }, [user_id, token])
   
     return (
 		<div className="container">
@@ -31,23 +33,22 @@ export default function Applications() {
 					Track
 				</div>
 				<div style={{display:"flex", flexDirection: "row"}}>
-					<button className="header-buttons" onClick={() => navigate('/editProfile', {state: {username: username, token: token}})}> Profile </button>
 					<button className="header-buttons" onClick={() => navigate('/')}> Logout </button>
 				</div>
 			</div>
 			{ applications.length > 0 ? (
-				<ApplicationCards apps={applications.slice(0,5)} username={username} token={token}/>
+				<ApplicationCards apps={applications.slice(0,5)} user_id={user_id} token={token}/>
 			) : (<div/>) }
 			{!applicationsError ? (
 				<div>
 					<div className="table-header-container">
 						<h2>Your Applications</h2>
 						<div style={{display:"flex", flexDirection: "row"}}>
-							<button className="table-header-buttons" onClick={() => navigate('/addApplication', {state: {username: username, token: token}})}> 
+							<button className="table-header-buttons" onClick={() => navigate('/addApplication', {state: { user_id: user_id, token: token }})}> 
 								<ion-icon name="add-outline"></ion-icon>
 								<span> Add Application </span>
 							</button>
-							<button className="table-header-buttons" onClick={() => navigate('/refresh', {state: {username: username, token: token}})}> 
+							<button className="table-header-buttons" onClick={() => navigate('/refresh', {state: { user_id: user_id, token: token }})}> 
 								<ion-icon name="refresh-circle-outline"></ion-icon>
 								<span> Refresh </span>
 							</button>
@@ -56,7 +57,7 @@ export default function Applications() {
 					{applications.length > 0 ? (
 						<div>
 							<input id="search" className="search" type="text" placeholder='Search company, position, or status' onChange={filter}></input>
-							<ApplicationTable applications={applications} username={username} token={token}/>
+							<ApplicationTable applications={applications} user_id={user_id} token={token}/>
 						</div>
 					) : (
 						<div className="subtitle" style={{marginLeft: "2%"}}> No applications yet! Add some applications or try refreshing. </div>

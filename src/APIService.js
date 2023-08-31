@@ -1,66 +1,15 @@
 export default class APIService {
 
-    /*========== Authentication API Methods ==========*/
-    // POST /users
-    static signUpUser(username, password) {
-        return fetch(process.env.REACT_APP_API_URL + 'users/', {
-            'method': "POST",
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({'username': username, "password": password})
-        }).then(response => {
-            if (response.ok) return response.json()
-            return this.errorHandler(response)
-        }).then(response => {
-            if ("error" in response) {
-                throw new Error(response["error"])
-            } else {
-                return response["id"]
-            }
-        })
-    }
-    // POST /auth
-    static loginUser(username, password) {
-        return fetch(process.env.REACT_APP_API_URL + 'auth/', {
-            'method': "POST",
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({'username': username, "password": password})
-        }).then(response => {
-            if (response.ok) {
-                return response.json()
-            }
-            return this.errorHandler(response)
-        }).then(response => {
-            if ("token" in response) {
-                return response["token"]
-            } else {
-                throw new Error(response["error"])
-            }
-        })
-    }
-    // DELETE /users/id
-    static deleteUser(id) {
-        return fetch(process.env.REACT_APP_API_URL + 'users/' + id, {
-            'method': "DELETE",
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        })
-    }
-
     /*========== Individual Applications API Methods ==========*/
     // POST /applications
-    static postApplications(token, username, company, position, status) {
+    static postApplications(token, user_id, company, position, status) {
         return fetch(process.env.REACT_APP_API_URL + 'applications/', {
             'method': "POST",
             headers: {
                 'Content-type': 'application/json',
-                'Authorization': 'Token ' + token,
+                'Authorization': token,
             },
-            body: JSON.stringify({"username": username, "company": company, "position": position, "status": status})
+            body: JSON.stringify({"user_id": user_id, "company": company, "position": position, "status": status})
         }).then(response => {
             if (response.ok) return null
             return this.errorHandler(response)
@@ -76,28 +25,19 @@ export default class APIService {
             'method': "GET",
             headers: {
                 'Content-type': 'application/json',
-                'Authorization': 'Token ' + token,
+                'Authorization': token,
             }
-        }).then(response => {
-            if (response.ok) return response.json()
-            return this.errorHandler(response)
-        }).then(response => {
-            if ("error" in response) {
-                throw new Error(response["error"])
-            } else {
-                return response
-            }
-        })
+        }).then(response => response.json())
     }
     // PUT /applications/id
-    static updateApplication(token, id, username, company, position, status) {
+    static updateApplication(token, id, user_id, company, position, status) {
         return fetch(process.env.REACT_APP_API_URL + 'applications/' + id + "/", {
             'method': "PUT",
             headers: {
                 'Content-type': 'application/json',
-                'Authorization': 'Token ' + token,
+                'Authorization': token,
             },
-            body: JSON.stringify({"username": username, "company": company, "position": position, "status": status})
+            body: JSON.stringify({"user_id": user_id, "company": company, "position": position, "status": status})
         }).then(response => {
             if (response.ok) return null
             return this.errorHandler(response)
@@ -113,7 +53,7 @@ export default class APIService {
             'method': "DELETE",
             headers: {
                 'Content-type': 'application/json',
-                'Authorization': 'Token ' + token,
+                'Authorization': token,
             },
         }).then(response => {
             if (response.ok) return null
@@ -125,63 +65,43 @@ export default class APIService {
         })
     }
     /*========== User Info API Methods ==========*/
-    // POST /userinfo/
-    static addUserDetails(username, token, email, last_refresh, imapPassword, imapURL) {
-        return fetch(process.env.REACT_APP_API_URL + 'userinfo/', {
+    // POST /users/
+    static createUser(email, token, email_type) {
+        return fetch(process.env.REACT_APP_API_URL + 'users/', {
             'method': "POST",
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': 'Token ' + token,
+                'Authorization': token,
             },
             body: JSON.stringify({
-                'username': username,
                 "email": email,
-                "last_refresh": last_refresh, 
-                "imap_password": imapPassword, 
-                "imap_url": imapURL
+                "last_refresh": "2001-01-01", 
+                "email_type": email_type,
             })
-        }).then(response => {
-            if (response.ok) return null
-            return this.errorHandler(response)
-        }).then(error => {
-            if (error != null) {
-                throw new Error(error["error"])
-            }
-        })
+        }).then(response => response.json())
     }
-    // GET /userinfo/username
-    static getUserDetails(username, token) {
-        return fetch(process.env.REACT_APP_API_URL + 'userinfo/' + username, {
+    // GET /users/email
+    static getUserDetails(user_id, token) {
+        return fetch(process.env.REACT_APP_API_URL + 'users/' + user_id, {
             'method': "GET",
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': 'Token ' + token,
+                'Authorization': token,
             },
-        }).then(response => {
-            if (response.ok) return response.json()
-            return this.errorHandler(response)
-        }).then(response => {
-            if ("error" in response) {
-                throw new Error(response["error"])
-            } else {
-                return response
-            }
-        })
+        }).then(response => response.json())
     }
-    // PUT /userinfo/username
-    static updateUserDetails(username, token, email, last_refresh, imapPassword, imapURL) {
-        return fetch(process.env.REACT_APP_API_URL + 'userinfo/' + username + "/", {
+    // PUT /users/email
+    static updateUserDetails(user_id, email, token, last_refresh, email_type) {
+        return fetch(process.env.REACT_APP_API_URL + 'users/' + user_id + "/", {
             'method': "PUT",
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': 'Token ' + token,
+                'Authorization': token,
             },
             body: JSON.stringify({
-                'username': username,
-                'email': email,
+                "email": email,
                 "last_refresh": last_refresh, 
-                "imap_password": imapPassword, 
-                "imap_url": imapURL
+                "email_type": email_type,
             })
         }).then(response => {
             if (response.ok) return null
@@ -193,59 +113,28 @@ export default class APIService {
         })
     }
 
-    // DELETE /userinfo/username
-    static deleteUserDetail(username, token) {
-        return fetch(process.env.REACT_APP_API_URL + 'userinfo/' + username + "/", {
-            'method': "DELETE",
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Token ' + token,
-            }
-        }).then(response => {
-            if (response.ok) return null
-            return this.errorHandler(response)
-        }).then(error => {
-            if (error != null) {
-                throw new Error(error["error"])
-            }
-        })
-    }
     /*========== User Applications API Methods ==========*/
-    // GET /userApplications/username
-    static getUserApplications(username, token) {
-        return fetch(process.env.REACT_APP_API_URL + 'userApplications/' + username, {
+    // GET /userApplications/user_id
+    static getUserApplications(user_id, token) {
+        return fetch(process.env.REACT_APP_API_URL + 'userApplications/' + user_id, {
             'method': "GET",
             headers: {
                 'Content-type': 'application/json',
-                'Authorization': 'Token ' + token,
+                'Authorization': token,
             }
-        }).then(response => {
-            if (response.ok) return response.json()
-            return this.errorHandler(response)
-        }).then(response => {
-            if ("error" in response) {
-                throw new Error(response["error"])
-            } else {
-                return response["applications"]
-            }
-        })
+        }).then(response => response.json())
+        .then(response => response["applications"])
     }
-    // GET /newApplications/username
-    static getNewApplications(username, token) {
-        return fetch(process.env.REACT_APP_API_URL + 'newApplications/' + username, {
+    // GET /newApplications/user_id
+    static getNewApplications(user_id, token) {
+        return fetch(process.env.REACT_APP_API_URL + 'newApplications/' + user_id, {
             'method': "GET",
                 headers: {
                     'Content-type': 'application/json',
-                    'Authorization': 'Token ' + token,
+                    'Authorization': token,
                 }
         }).then(response => response.json())
-        .then(response => {
-            if ("newApplications" in response) {
-                return response["newApplications"]
-            } else {
-                throw new Error("Failed to get new applications. Make sure your IMAP password and email are correct or try again later.")
-            }
-        })
+        .then(response => response['newApplications'])
     }
     
      /*========== Helper Methods ==========*/
@@ -263,13 +152,13 @@ export default class APIService {
         })
     }
 
-    static isValidPassword(pw) {
-        return /[A-Z]/.test(pw) && /[a-z]/.test(pw) && /[0-9]/.test(pw) && pw.length > 6
-    }
-    
-    static isValidEmail(email) {
-        return String(email).toLowerCase().match(
-          /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-        )
+    static getEmailFromToken(token) {
+        return fetch(process.env.REACT_APP_GOOGLE_API_URL, {
+            headers: {
+                'Authorization': 'Bearer ' + token
+            }
+        })
+        .then(response => response.json())
+        .then(content => content.email)
     }
 }

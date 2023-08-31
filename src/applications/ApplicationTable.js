@@ -20,7 +20,7 @@ export default function ApplicationTable(props) {
                         <td>{application.company}</td>
                         <td>{application.position}</td>
                         <td>{application.status}</td>
-                        <td><button className="table-buttons" onClick={() => navigate('/editApplication', {state: {username: props.username, token: props.token, id: application.id}})}>Edit</button></td>
+                        <td><button className="table-buttons" onClick={() => navigate('/editApplication', {state: {user_id: props.user_id, token: props.token, id: application.id}})}>Edit</button></td>
                     </tr>
                     )
                 })}
